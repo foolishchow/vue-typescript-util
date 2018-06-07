@@ -1,0 +1,30 @@
+{
+  "name": "vue-typescript-util",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foolishchow/vue-typescript-util.git"
+  },
+  "author": "foolishchow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foolishchow/vue-typescript-util/issues"
+  },
+  "homepage": "https://github.com/foolishchow/vue-typescript-util#readme",
+  "peerDependencies": {
+    "vue": "^2.5.16",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^2.9.1"
+  },
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vuex": "^3.0.1"
+  }
+}
