@@ -21,10 +21,8 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "typescript": "^2.9.1"
-  },
-  "dependencies": {
     "vue": "^2.5.16",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "typescript": "^2.9.1"
   }
 }

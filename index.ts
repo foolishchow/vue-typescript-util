@@ -1,2 +1,2 @@
-export * from './vuex'
-export * from './vue'
+export * from './vue-utils'
+export * from './vuex-utils'

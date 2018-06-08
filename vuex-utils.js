@@ -1,28 +1,22 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function getMutatationName(mutation, namespace) {
+export function getMutatationName(mutation, namespace) {
     return Object.keys(mutation).reduce((prev, current) => {
         prev[current] = (namespace != undefined ? `${namespace}/` : '') + current;
         return prev;
     }, {});
 }
-exports.getMutatationName = getMutatationName;
-function generateMutationDictionary(init) {
+export function generateMutationDictionary(init) {
     return {};
 }
-exports.generateMutationDictionary = generateMutationDictionary;
-function getActionName(mutation, namespace) {
+export function getActionName(mutation, namespace) {
     return Object.keys(mutation).reduce((prev, current) => {
         prev[current] = (namespace != undefined ? `${namespace}/` : '') + current;
         return prev;
     }, {});
 }
-exports.getActionName = getActionName;
 //#endregion [action]
-function AbstractStoreMutations() {
+export function AbstractStoreMutations() {
     // return
 }
-exports.AbstractStoreMutations = AbstractStoreMutations;
 function FlattenGetters(obj, namespace = '') {
     let cached = {};
     if (namespace != '') {
@@ -63,7 +57,7 @@ function FlattenGetters(obj, namespace = '') {
     }
     return cached;
 }
-function InjectStore(store) {
+export function InjectStore(store) {
     let cahced = FlattenGetters(store.getters);
     Object.defineProperty(store, 'Getters', {
         get() {
@@ -81,7 +75,6 @@ function InjectStore(store) {
         }
     });
 }
-exports.InjectStore = InjectStore;
 /* interface Deep<T> {
   p1: T;
   p2: T;
