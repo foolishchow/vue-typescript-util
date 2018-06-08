@@ -13,14 +13,14 @@ export interface VueDefaultJSXElementAttributes {
   class?: (string | { [key: string]: boolean }) | (string | { [key: string]: boolean })[]
   style?: (string | { [key: string]: boolean }) | (string | { [key: string]: boolean })[];
   key?: string | number;
-  onClick?: (e: MouseEvent) => any;
-  'on-click'?: (e: MouseEvent) => any;
-  onDblclick?: (e: MouseEvent) => any;
-  'on-dblclick'?: (e: MouseEvent) => any;
-  onMouseenter?: (e: MouseEvent) => any;
-  'on-mouseenter'?: (e: MouseEvent) => any;
-  onMouseleave?: (e: MouseEvent) => any;
-  'on-mouseleave'?: (e: MouseEvent) => any;
+  onClick?: (e: MouseEvent) => any | void;
+  'on-click'?: (e: MouseEvent) => any | void;
+  onDblclick?: (e: MouseEvent) => any | void;
+  'on-dblclick'?: (e: MouseEvent) => any | void;
+  onMouseenter?: (e: MouseEvent) => any | void;
+  'on-mouseenter'?: (e: MouseEvent) => any | void;
+  onMouseleave?: (e: MouseEvent) => any | void;
+  'on-mouseleave'?: (e: MouseEvent) => any | void;
 }
 export interface VueComponent<store extends Store<any> = Store<any>, Props={}> extends Vue {
   $props: Props & VueDefaultJSXElementAttributes;
