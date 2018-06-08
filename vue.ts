@@ -8,6 +8,7 @@ export type VueModelType<T> = {
 export interface VueDefaultJSXElementAttributes {
   ref?: string;
   slot?: string;
+  'v-show'?: boolean;
   domPropsInnerHTML?: string;
   class?: (string | { [key: string]: boolean }) | (string | { [key: string]: boolean })[]
   style?: (string | { [key: string]: boolean }) | (string | { [key: string]: boolean })[];

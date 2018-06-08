@@ -9,6 +9,7 @@ export declare type VueModelType<T> = {
 export interface VueDefaultJSXElementAttributes {
     ref?: string;
     slot?: string;
+    'v-show'?: boolean;
     domPropsInnerHTML?: string;
     class?: (string | {
         [key: string]: boolean;
