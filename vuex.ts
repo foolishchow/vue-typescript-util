@@ -40,8 +40,8 @@ export interface AbstractActionContext<State, RootState, getters = any, rootGett
   rootState: RootState;
   rootGetters: rootGetters;
 }
-type AbstractActionHandler<S, RS, G, RG, Payload = any> = (injectee: AbstractActionContext<S, RS, G, RG>, payload: Payload) => any;
-interface AbstractActionObject<S, RS, G, RG, Payload=any> {
+export type AbstractActionHandler<S, RS, G, RG, Payload = any> = (injectee: AbstractActionContext<S, RS, G, RG>, payload: Payload) => any;
+export interface AbstractActionObject<S, RS, G, RG, Payload=any> {
   root?: boolean;
   handler: AbstractActionHandler<S, RS, G, RG, Payload>;
 }
@@ -61,6 +61,9 @@ export function getActionName<Typedef>(mutation: AbstractActionModule<Typedef, a
 }
 //#endregion [action]
 
+export function AbstractStoreMutations() {
+  // return
+}
 
 type TypedCallBack<M> = ((name: MutationName<M>, payload: M) => void) | ((name: MutationName<M>) => void)
 export interface InjectStore<state, getter> extends Store<state> {

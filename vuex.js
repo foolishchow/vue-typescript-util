@@ -18,6 +18,11 @@ function getActionName(mutation, namespace) {
     }, {});
 }
 exports.getActionName = getActionName;
+//#endregion [action]
+function AbstractStoreMutations() {
+    // return
+}
+exports.AbstractStoreMutations = AbstractStoreMutations;
 function FlattenGetters(obj, namespace = '') {
     let cached = {};
     if (namespace != '') {

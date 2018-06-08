@@ -24,8 +24,8 @@ export interface AbstractActionContext<State, RootState, getters = any, rootGett
     rootState: RootState;
     rootGetters: rootGetters;
 }
-declare type AbstractActionHandler<S, RS, G, RG, Payload = any> = (injectee: AbstractActionContext<S, RS, G, RG>, payload: Payload) => any;
-interface AbstractActionObject<S, RS, G, RG, Payload = any> {
+export declare type AbstractActionHandler<S, RS, G, RG, Payload = any> = (injectee: AbstractActionContext<S, RS, G, RG>, payload: Payload) => any;
+export interface AbstractActionObject<S, RS, G, RG, Payload = any> {
     root?: boolean;
     handler: AbstractActionHandler<S, RS, G, RG, Payload>;
 }
@@ -39,6 +39,7 @@ export declare type ActionNames<Typedef> = {
     readonly [p in keyof Typedef]: ActionName<Typedef[p]>;
 };
 export declare function getActionName<Typedef>(mutation: AbstractActionModule<Typedef, any>, namespace?: string): ActionNames<Typedef>;
+export declare function AbstractStoreMutations(): void;
 export interface InjectStore<state, getter> extends Store<state> {
     Getters: getter;
     Commit<M>(name: MutationName<M>, payload: M): void;
@@ -47,4 +48,3 @@ export interface InjectStore<state, getter> extends Store<state> {
     Dispatch<M>(name: ActionName<M>): void;
 }
 export declare function InjectStore(store: Store<any>): void;
-export { };
