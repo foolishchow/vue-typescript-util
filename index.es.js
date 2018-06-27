@@ -51,6 +51,7 @@ function MakeVuexModule(moduleTree, moduleName, namespace) {
     var rootMutations = null;
     if (moduleTree.mutations) {
         moduleMutations = getMutatationName(moduleTree.mutations);
+        rootMutations = moduleMutations;
         if (namespace)
             rootMutations = getMutatationName(moduleTree.mutations, moduleName);
     }

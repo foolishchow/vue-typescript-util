@@ -81,6 +81,7 @@ export function MakeVuexModule<State=any, Getters=any, Mutations=any, Actions=an
   let rootMutations: MutationNames<Mutations> = null as any;
   if (moduleTree.mutations) {
     moduleMutations = getMutatationName(moduleTree.mutations) as any;
+    rootMutations = moduleMutations;
     if (namespace) rootMutations = getMutatationName(moduleTree.mutations, moduleName) as any;
   }
   let rootActions: ActionNames<Actions> = null as any;
