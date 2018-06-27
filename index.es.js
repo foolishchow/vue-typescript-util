@@ -1,10 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var Vue = _interopDefault(require('vue'));
+import Vue from 'vue';
 
 function getMutatationName(mutation, namespace) {
     return Object.keys(mutation).reduce((prev, current) => {
@@ -113,9 +107,4 @@ foo.fn().toFixed(0); // works */
 class VueComponent extends Vue {
 }
 
-exports.VueComponent = VueComponent;
-exports.getMutatationName = getMutatationName;
-exports.generateMutationDictionary = generateMutationDictionary;
-exports.getActionName = getActionName;
-exports.AbstractStoreMutations = AbstractStoreMutations;
-exports.InjectStore = InjectStore;
+export { VueComponent, getMutatationName, generateMutationDictionary, getActionName, AbstractStoreMutations, InjectStore };

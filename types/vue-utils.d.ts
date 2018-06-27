@@ -1,5 +1,3 @@
-import Vue from "vue";
-import { Store } from "vuex";
 export declare type VueModelType<T> = {
     value: T;
     onInput?: (value: T) => void;
@@ -30,10 +28,4 @@ export interface VueDefaultJSXElementAttributes {
     'on-mouseenter'?: (e: MouseEvent) => any | void;
     onMouseleave?: (e: MouseEvent) => any | void;
     'on-mouseleave'?: (e: MouseEvent) => any | void;
-}
-export interface VueComponent<store extends Store<any> = Store<any>, Props = {}> extends Vue {
-    $props: Props & VueDefaultJSXElementAttributes;
-    $store: store;
-}
-export declare class VueComponent<store extends Store<any> = Store<any>, Props = {}> extends Vue {
 }
