@@ -16,7 +16,7 @@ export const actions: ActionModule<DomActions, DomState, DomGetters> = {
     } else {
       // commit from module
       context.commit(ModuleMutations.setActive, 0)
-      console.info(`do not clear`)
+      console.info(`commit from module`)
     }
   }
 }

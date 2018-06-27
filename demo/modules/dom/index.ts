@@ -1,40 +1,36 @@
+import { MakeVuexModule } from "../../..";
+import { registeActions, registeMutations } from "../..";
 import { actions } from "./actions";
-import { getters, DomGetters } from "./getters";
+import { DomGetters, getters } from "./getters";
 import { mutations } from "./mutations";
-import { state, DomState } from "./state";
-import { getActionName, getMutatationName } from "../../..";
-import { StoreActions, StoreMutations } from "../..";
-import { MakeVuexModule, BindToRootActions, BindToRootMutation } from "../../..";
+import { DomState, state } from "./state";
 
-const ActionNames = getActionName(actions, 'dom')
-StoreActions.dom = ActionNames;
-const MutationsNames = getMutatationName(mutations, 'dom');
-StoreMutations.dom = MutationsNames;
 
-export const ModuleMutations = getMutatationName(mutations);
 declare module "../.." {
   interface AppStoreStates {
     dom: DomState
   }
+  interface AppStoreMutations {
+    dom: typeof DomModel.mutations
+  }
+  interface AppStoreActions {
+    dom: typeof DomModel.actions
+  }
   interface AppStoreGetters {
     dom: DomGetters
   }
-  interface AppStoreMutations {
-    dom: typeof domModule.mutations
-  }
-  interface AppStoreActions {
-    dom: typeof domModule.actions
-  }
 }
-const m = {
+const domModuleInstance = {
   state,
   getters,
   mutations,
   actions
-};
-const domModule = MakeVuexModule(m, 'dom', true);
-BindToRootActions(domModule.actions, 'dom', StoreActions);
-BindToRootMutation(domModule.mutations, 'dom', StoreMutations);
-export default domModule.module;
+}
+const DomModel = MakeVuexModule(domModuleInstance, 'dom', true);
+export const ModuleMutations = DomModel.moduleMutations;
+
+registeActions(DomModel.actions, 'dom');
+registeMutations(DomModel.mutations, 'dom');
 
 
+export default DomModel.module;
