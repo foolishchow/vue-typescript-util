@@ -9,4 +9,9 @@ export interface VueComponent<Props={}, store extends Store<any> = Store<any>> e
   $props: Props & VueDefaultJSXElementAttributes;
   $store: store
 }
-export class VueComponent<Props={}, store extends Store<any> = Store<any>> extends Vue { }
+export class VueComponent<Props={}, store extends Store<any> = Store<any>> extends Vue {
+
+}
+// export function VueComponent<Props={}, store extends Store<any> = Store<any>>() {
+
+// }
