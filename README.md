@@ -7,7 +7,7 @@ this module only work with `/.tsx?/` file
 to make `VueComponent` active.     
 you have to create a `jsx.d.ts` file in project root like [this](https://github.com/foolishchow/vue-typescript/blob/master/jsx.d.ts)
 
-also  you may need this => [how it worked](https://github.com/foolishchow/vue-typescript)
+you may need this => [how it worked](https://github.com/foolishchow/vue-typescript)  and [preview](http://htmlpreview.github.io/?https://github.com/foolishchow/vue-typescript/blob/preview/dist/index.html)
 
 ### exposed
   - vue
