@@ -23,7 +23,7 @@ also  you may need this => [how it worked](https://github.com/foolishchow/vue-ty
 
 > see folder `demo`
 
-- `VueComponent<Props={}, store extends Store<any> = Store<any>>`
+- `VueComponent<Props={}, store extends Store<any> = Store<any>>`   
   with `vue-class-component` you can use type checking 
   ```typescript
   import Component from "vue-class-component";
