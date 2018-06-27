@@ -19,6 +19,10 @@
     "url": "https://github.com/foolishchow/vue-typescript-util/issues"
   },
   "homepage": "https://github.com/foolishchow/vue-typescript-util#readme",
+  "peerDependencies": {
+    "vue": "^2.5.16",
+    "vuex": "^3.0.1"
+  },
   "devDependencies": {
     "vue": "^2.5.16",
     "vuex": "^3.0.1",
@@ -30,5 +34,11 @@
     "rollup-plugin-uglify": "^1.0.1",
     "rollup-typescript": "^1.1.2",
     "rollup-watch": "^4.3.1"
-  }
+  },
+  "keywords": [
+    "vue",
+    "vuex",
+    "typescript",
+    "type check"
+  ]
 }
