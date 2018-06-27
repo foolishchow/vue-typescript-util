@@ -41,18 +41,47 @@ function getMutatationName(mutation, namespace) {
         return prev;
     }, {});
 }
-function generateMutationDictionary(init) {
-    return {};
-}
 function getActionName(mutation, namespace) {
     return Object.keys(mutation).reduce(function (prev, current) {
         prev[current] = (namespace != undefined ? namespace + "/" : '') + current;
         return prev;
     }, {});
 }
-//#endregion [action]
-function AbstractStoreMutations() {
-    // return
+function MakeVuexModule(moduleTree, moduleName, namespace) {
+    if (namespace === void 0) { namespace = false; }
+    var _moduleTree = moduleTree;
+    if (namespace) {
+        _moduleTree.namespaced = true;
+    }
+    var moduleMutations = null;
+    var rootMutations = null;
+    if (moduleTree.mutations) {
+        moduleMutations = getMutatationName(moduleTree.mutations);
+        if (namespace)
+            rootMutations = getMutatationName(moduleTree.mutations, moduleName);
+    }
+    var rootActions = null;
+    if (moduleTree.actions) {
+        rootActions = getActionName(moduleTree.actions, namespace ? moduleName : undefined);
+    }
+    return {
+        module: _moduleTree,
+        moduleMutations: moduleMutations,
+        mutations: rootMutations,
+        actions: rootActions
+    };
+}
+function BindToRootMutation(mutations, namespace, rootMutations) {
+    if (rootMutations === void 0) { rootMutations = -1; }
+    if (rootMutations != -1 && mutations) {
+        rootMutations[namespace] = mutations;
+    }
+}
+function BindToRootActions(actions, namespace, rootActions) {
+    if (rootActions === void 0) { rootActions = -1; }
+    if (rootActions != -1 && actions) {
+        rootActions[namespace] = actions;
+    }
 }
 function FlattenGetters(obj, namespace) {
     if (namespace === void 0) { namespace = ''; }
@@ -153,7 +182,8 @@ var VueComponent = /** @class */ (function (_super) {
 
 exports.VueComponent = VueComponent;
 exports.getMutatationName = getMutatationName;
-exports.generateMutationDictionary = generateMutationDictionary;
 exports.getActionName = getActionName;
-exports.AbstractStoreMutations = AbstractStoreMutations;
+exports.MakeVuexModule = MakeVuexModule;
+exports.BindToRootMutation = BindToRootMutation;
+exports.BindToRootActions = BindToRootActions;
 exports.InjectStore = InjectStore;

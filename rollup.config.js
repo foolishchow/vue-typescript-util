@@ -5,7 +5,7 @@ const
   uglify = require('rollup-plugin-uglify');
 
 export default {
-  input: './index.ts',
+  input: './src/index.ts',
   moduleName: '',
   plugins: [
     Ts(),

@@ -1,4 +1,4 @@
-import { Store, Dispatch, Commit } from "vuex";
+import { Commit, Dispatch, Module, Store } from "vuex";
 export declare type MutationName<M> = string & {
     payload: M;
 };
@@ -9,7 +9,6 @@ export declare type AbstractMutationModule<Typedef, State> = {
     readonly [p in keyof Typedef]: (state: State, payload: Typedef[p]) => void;
 };
 export declare function getMutatationName<Typedef>(mutation: AbstractMutationModule<Typedef, any>, namespace?: string): MutationNames<Typedef>;
-export declare function generateMutationDictionary<T, Initial>(init: Initial): T & Initial;
 export declare type AbstractGetterModule<Typedef, State, RootState = any, RootGetter = any> = {
     readonly [p in keyof Typedef]: (state: State, getters: AbstractGetterModule<Typedef, State, RootState, RootGetter>, rootState: RootState, rootGetters: RootGetter) => Typedef[p];
 };
@@ -39,7 +38,20 @@ export declare type ActionNames<Typedef> = {
     readonly [p in keyof Typedef]: ActionName<Typedef[p]>;
 };
 export declare function getActionName<Typedef>(mutation: AbstractActionModule<Typedef, any>, namespace?: string): ActionNames<Typedef>;
-export declare function AbstractStoreMutations(): void;
+declare type _moduleTree<State = any, Getters = any, Mutations = any, Actions = any, rootStates = any, rootGetters = any> = {
+    state?: State;
+    getters?: AbstractGetterModule<Getters, State, rootStates, rootGetters>;
+    mutations?: AbstractMutationModule<Mutations, State>;
+    actions?: AbstractActionModule<Actions, State, Getters, rootStates, rootGetters>;
+};
+export declare function MakeVuexModule<State = any, Getters = any, Mutations = any, Actions = any, rootStates = any, rootGetters = any>(moduleTree: _moduleTree<State, Getters, Mutations, Actions, rootStates, rootGetters>, moduleName: string, namespace?: boolean): {
+    module: Module<State, rootStates>;
+    moduleMutations: MutationNames<Mutations>;
+    mutations: MutationNames<Mutations>;
+    actions: ActionNames<Actions>;
+};
+export declare function BindToRootMutation<Mutations = any>(mutations: MutationNames<Mutations>, namespace: string, rootMutations?: any): void;
+export declare function BindToRootActions<Actions = any>(actions: ActionNames<Actions>, namespace: string, rootActions?: any): void;
 export interface InjectStore<state, getter> extends Store<state> {
     Getters: getter;
     Commit<M>(name: MutationName<M>, payload: M): void;
@@ -48,3 +60,4 @@ export interface InjectStore<state, getter> extends Store<state> {
     Dispatch<M>(name: ActionName<M>): void;
 }
 export declare function InjectStore(store: Store<any>): void;
+export {};

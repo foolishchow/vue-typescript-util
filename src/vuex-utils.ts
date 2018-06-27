@@ -1,4 +1,4 @@
-import { Mutation, Getter, Store, Action, Dispatch, Commit } from "vuex";
+import { Commit, Dispatch, Module, Store } from "vuex";
 
 //#region [mutation]
 export type MutationName<M> = string & { payload: M };
@@ -15,9 +15,9 @@ export function getMutatationName<Typedef>(mutation: AbstractMutationModule<Type
   }, {} as MutationNames<Typedef>)
 }
 
-export function generateMutationDictionary<T, Initial>(init: Initial): T & Initial {
+/* export function generateMutationDictionary<T, Initial>(init: Initial): T & Initial {
   return {} as any;
-}
+} */
 
 //#endregion [mutation]
 
@@ -61,9 +61,52 @@ export function getActionName<Typedef>(mutation: AbstractActionModule<Typedef, a
 }
 //#endregion [action]
 
-export function AbstractStoreMutations() {
-  // return
+type _moduleTree<State=any, Getters=any, Mutations=any, Actions=any, rootStates=any, rootGetters=any> = {
+  state?: State;
+  getters?: AbstractGetterModule<Getters, State, rootStates, rootGetters>;
+  mutations?: AbstractMutationModule<Mutations, State>;
+  actions?: AbstractActionModule<Actions, State, Getters, rootStates, rootGetters>
 }
+
+export function MakeVuexModule<State=any, Getters=any, Mutations=any, Actions=any, rootStates=any, rootGetters=any>(
+  moduleTree: _moduleTree<State, Getters, Mutations, Actions, rootStates, rootGetters>,
+  moduleName: string,
+  namespace: boolean = false
+) {
+  let _moduleTree = moduleTree as Module<State, rootStates>;
+  if (namespace) {
+    _moduleTree.namespaced = true;
+  }
+  let moduleMutations: MutationNames<Mutations> = null as any;
+  let rootMutations: MutationNames<Mutations> = null as any;
+  if (moduleTree.mutations) {
+    moduleMutations = getMutatationName(moduleTree.mutations) as any;
+    if (namespace) rootMutations = getMutatationName(moduleTree.mutations, moduleName) as any;
+  }
+  let rootActions: ActionNames<Actions> = null as any;
+  if (moduleTree.actions) {
+    rootActions = getActionName(moduleTree.actions, namespace ? moduleName : undefined) as any;
+  }
+  return {
+    module: _moduleTree,
+    moduleMutations,
+    mutations: rootMutations,
+    actions: rootActions
+  }
+}
+export function BindToRootMutation<Mutations=any>(
+  mutations: MutationNames<Mutations>, namespace: string, rootMutations: any = -1
+) {
+  if (rootMutations != -1 && mutations) {
+    rootMutations[namespace] = mutations;
+  }
+}
+export function BindToRootActions<Actions=any>(actions: ActionNames<Actions>, namespace: string, rootActions: any = -1) {
+  if (rootActions != -1 && actions) {
+    rootActions[namespace] = actions;
+  }
+}
+
 
 type TypedCallBack<M> = ((name: MutationName<M>, payload: M) => void) | ((name: MutationName<M>) => void)
 export interface InjectStore<state, getter> extends Store<state> {
