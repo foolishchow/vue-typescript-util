@@ -1,5 +1,14 @@
 # vue-typescript-util
 
+<p>
+    <a href="https://www.npmjs.com/package/vue-typescript-util">
+        <img src="https://img.shields.io/npm/v/vue-typescript-util.svg" alt="Version">
+    </a> 
+    <a href="https://www.npmjs.com/package/vue-typescript-util">
+        <img src="https://img.shields.io/npm/dm/vue-typescript-util.svg" alt="Downloads">
+    </a>
+</p>
+
 > write vue with type check   
 this module only work with `/.tsx?/` file 
 
