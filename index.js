@@ -72,16 +72,32 @@ function MakeVuexModule(moduleTree, moduleName, namespace) {
         actions: rootActions
     };
 }
-function BindToRootMutation(mutations, namespace, rootMutations) {
+function BindToRootMutation(mutations, rootMutations, namespace) {
     if (rootMutations === void 0) { rootMutations = -1; }
+    if (namespace === void 0) { namespace = ''; }
     if (rootMutations != -1 && mutations) {
-        rootMutations[namespace] = mutations;
+        if (namespace) {
+            rootMutations[namespace] = mutations;
+        }
+        else {
+            Object.keys(mutations).forEach(function (k) {
+                rootMutations[k] = mutations[k];
+            });
+        }
     }
 }
-function BindToRootActions(actions, namespace, rootActions) {
+function BindToRootActions(actions, rootActions, namespace) {
     if (rootActions === void 0) { rootActions = -1; }
+    if (namespace === void 0) { namespace = ''; }
     if (rootActions != -1 && actions) {
-        rootActions[namespace] = actions;
+        if (namespace) {
+            rootActions[namespace] = actions;
+        }
+        else {
+            Object.keys(actions).forEach(function (k) {
+                rootActions[k] = actions[k];
+            });
+        }
     }
 }
 function FlattenGetters(obj, namespace) {

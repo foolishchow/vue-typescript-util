@@ -1,4 +1,4 @@
-import { Commit, Dispatch, Module, Store } from "vuex";
+import { Commit, Dispatch, Module, Store, CommitOptions } from "vuex";
 
 //#region [mutation]
 export type MutationName<M> = string & { payload: M };
@@ -32,6 +32,10 @@ export type NamespacedGetters<T, NS = string> = {
 //#endregion [getter]
 
 //#region [action]
+export interface TypedCommit {
+  <T>(type: MutationName<T>, payload: T, options?: CommitOptions): void;
+  <T = never>(type: MutationName<T>, options?: CommitOptions): void;
+}
 export interface AbstractActionContext<State, RootState, getters = any, rootGetters =any> {
   dispatch: Dispatch;
   commit: Commit;
@@ -96,15 +100,27 @@ export function MakeVuexModule<State=any, Getters=any, Mutations=any, Actions=an
   }
 }
 export function BindToRootMutation<Mutations=any>(
-  mutations: MutationNames<Mutations>, namespace: string, rootMutations: any = -1
+  mutations: MutationNames<Mutations>, rootMutations: any = -1, namespace: string = ''
 ) {
   if (rootMutations != -1 && mutations) {
-    rootMutations[namespace] = mutations;
+    if (namespace) {
+      rootMutations[namespace] = mutations;
+    } else {
+      Object.keys(mutations).forEach(k => {
+        rootMutations[k] = (mutations as any)[k];
+      });
+    }
   }
 }
-export function BindToRootActions<Actions=any>(actions: ActionNames<Actions>, namespace: string, rootActions: any = -1) {
+export function BindToRootActions<Actions=any>(actions: ActionNames<Actions>, rootActions: any = -1, namespace: string = '') {
   if (rootActions != -1 && actions) {
-    rootActions[namespace] = actions;
+    if (namespace) {
+      rootActions[namespace] = actions;
+    } else {
+      Object.keys(actions).forEach(k => {
+        rootActions[k] = (actions as any)[k];
+      });
+    }
   }
 }
 

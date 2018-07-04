@@ -1,4 +1,4 @@
-import { Commit, Dispatch, Module, Store } from "vuex";
+import { Commit, Dispatch, Module, Store, CommitOptions } from "vuex";
 export declare type MutationName<M> = string & {
     payload: M;
 };
@@ -15,6 +15,10 @@ export declare type AbstractGetterModule<Typedef, State, RootState = any, RootGe
 export declare type NamespacedGetters<T, NS = string> = {
     [p in keyof T]: T[p];
 };
+export interface TypedCommit {
+    <T>(type: MutationName<T>, payload: T, options?: CommitOptions): void;
+    <T = never>(type: MutationName<T>, options?: CommitOptions): void;
+}
 export interface AbstractActionContext<State, RootState, getters = any, rootGetters = any> {
     dispatch: Dispatch;
     commit: Commit;
@@ -50,8 +54,8 @@ export declare function MakeVuexModule<State = any, Getters = any, Mutations = a
     mutations: MutationNames<Mutations>;
     actions: ActionNames<Actions>;
 };
-export declare function BindToRootMutation<Mutations = any>(mutations: MutationNames<Mutations>, namespace: string, rootMutations?: any): void;
-export declare function BindToRootActions<Actions = any>(actions: ActionNames<Actions>, namespace: string, rootActions?: any): void;
+export declare function BindToRootMutation<Mutations = any>(mutations: MutationNames<Mutations>, rootMutations?: any, namespace?: string): void;
+export declare function BindToRootActions<Actions = any>(actions: ActionNames<Actions>, rootActions?: any, namespace?: string): void;
 export interface InjectStore<state, getter> extends Store<state> {
     Getters: getter;
     Commit<M>(name: MutationName<M>, payload: M): void;
