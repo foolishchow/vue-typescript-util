@@ -38,7 +38,7 @@ export interface TypedCommit {
 }
 export interface AbstractActionContext<State, RootState, getters = any, rootGetters =any> {
   dispatch: Dispatch;
-  commit: Commit;
+  commit: TypedCommit;
   state: State;
   getters: getters;
   rootState: RootState;
@@ -129,9 +129,9 @@ type TypedCallBack<M> = ((name: MutationName<M>, payload: M) => void) | ((name: 
 export interface InjectStore<state, getter> extends Store<state> {
   Getters: getter;
   Commit<M>(name: MutationName<M>, payload: M): void;
-  Commit<M>(name: MutationName<M>): void;
+  Commit(name: MutationName<never>): void;
   Dispatch<M>(name: ActionName<M>, payload: M): void;
-  Dispatch<M>(name: ActionName<M>): void;
+  Dispatch(name: ActionName<never>): void;
 }
 
 function FlattenGetters(obj: any, namespace: string = '') {

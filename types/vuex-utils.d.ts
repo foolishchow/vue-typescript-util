@@ -1,4 +1,4 @@
-import { Commit, Dispatch, Module, Store, CommitOptions } from "vuex";
+import { Dispatch, Module, Store, CommitOptions } from "vuex";
 export declare type MutationName<M> = string & {
     payload: M;
 };
@@ -21,7 +21,7 @@ export interface TypedCommit {
 }
 export interface AbstractActionContext<State, RootState, getters = any, rootGetters = any> {
     dispatch: Dispatch;
-    commit: Commit;
+    commit: TypedCommit;
     state: State;
     getters: getters;
     rootState: RootState;
@@ -59,9 +59,9 @@ export declare function BindToRootActions<Actions = any>(actions: ActionNames<Ac
 export interface InjectStore<state, getter> extends Store<state> {
     Getters: getter;
     Commit<M>(name: MutationName<M>, payload: M): void;
-    Commit<M>(name: MutationName<M>): void;
+    Commit(name: MutationName<never>): void;
     Dispatch<M>(name: ActionName<M>, payload: M): void;
-    Dispatch<M>(name: ActionName<M>): void;
+    Dispatch(name: ActionName<never>): void;
 }
 export declare function InjectStore(store: Store<any>): void;
 export {};
